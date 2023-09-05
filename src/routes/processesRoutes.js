@@ -6,10 +6,12 @@ import processSchemas from "../schemas/processesSchemas.js";
 
 const processesRouters = Router();
 
-processesRouters.post(
-  "/processes",
-  validateBody(processSchemas.processSchema),
-  processesControllers.createProcess
-);
+processesRouters
+  .post(
+    "/processes",
+    validateBody(processSchemas.processSchema),
+    processesControllers.createProcess
+  )
+  .delete("/processes/:id", processesControllers.deleteProcess);
 
 export default processesRouters;
