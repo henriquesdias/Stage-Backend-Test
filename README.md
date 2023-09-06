@@ -56,3 +56,13 @@ This is the required format of the body:
 Successful response:
 
 - Status code 201
+
+### 2. DELETE /processes/:id
+
+DELETE a process.
+
+The "id" params must be a valid id of a process
+
+Successful response:
+
+- Status code 200

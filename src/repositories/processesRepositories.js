@@ -12,11 +12,15 @@ async function deleteProcess(id) {
 async function getProcessById(id) {
   return db.query("SELECT * FROM processes WHERE id = $1", [id]);
 }
+async function getProcesses() {
+  return db.query("SELECT * FROM processes");
+}
 
 const processesRepositories = {
   createProcess,
   deleteProcess,
   getProcessById,
+  getProcesses,
 };
 
 export default processesRepositories;

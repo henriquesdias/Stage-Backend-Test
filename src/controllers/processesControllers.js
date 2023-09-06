@@ -21,10 +21,19 @@ async function deleteProcess(req, res) {
     res.sendStatus(500);
   }
 }
+async function getProcesses(req, res) {
+  try {
+    const processes = await processesServices.getProcesses();
+    res.send(processes);
+  } catch (error) {
+    res.sendStatus(400);
+  }
+}
 
 const processesControllers = {
   createProcess,
   deleteProcess,
+  getProcesses,
 };
 
 export default processesControllers;
