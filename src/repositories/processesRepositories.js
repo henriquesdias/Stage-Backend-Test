@@ -15,12 +15,19 @@ async function getProcessById(id) {
 async function getProcesses() {
   return db.query("SELECT * FROM processes");
 }
+async function updateProcess(id, title, description) {
+  return db.query(
+    "UPDATE processes SET title = $1 , description = $2 WHERE id = $3;",
+    [title, description, id]
+  );
+}
 
 const processesRepositories = {
   createProcess,
   deleteProcess,
   getProcessById,
   getProcesses,
+  updateProcess,
 };
 
 export default processesRepositories;

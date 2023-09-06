@@ -15,11 +15,19 @@ async function deleteProcess(id) {
 async function getProcesses() {
   return (await processesRepositories.getProcesses()).rows;
 }
+async function updateProcess(id, title, description) {
+  const process = await processesRepositories.getProcessById(id);
+  if (process.rowCount === 0) {
+    throw { message: "This process do not exists", name: "notFound" };
+  }
+  return processesRepositories.updateProcess(id, title, description);
+}
 
 const processesServices = {
   createProcess,
   deleteProcess,
   getProcesses,
+  updateProcess,
 };
 
 export default processesServices;

@@ -66,3 +66,43 @@ The "id" params must be a valid id of a process
 Successful response:
 
 - Status code 200
+
+### 3. GET /processes
+
+Get all processes.
+
+```code
+  [
+    {
+      "title": "processe's title",
+      "description": "processes's description"
+    },
+    {
+      "title": "processe's title",
+      "description": "processes's description"
+    }
+  ]
+```
+
+Successful response:
+
+- Status code 200
+
+### 4. PUT /processes/:id
+
+Update a process, based on the provided title and description.
+
+The "id" params must be a valid id of a process.
+
+This is the required format of the body:
+
+```code
+  {
+    "title": "processe's title",
+    "description": "processes's description"
+  }
+```
+
+Successful response:
+
+- Status code 200

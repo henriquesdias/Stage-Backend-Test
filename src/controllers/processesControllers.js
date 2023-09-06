@@ -6,7 +6,7 @@ async function createProcess(req, res) {
     await processesServices.createProcess(title, description);
     res.sendStatus(201);
   } catch (error) {
-    res.sendStatus(500);
+    res.sendStatus(400);
   }
 }
 async function deleteProcess(req, res) {
@@ -18,7 +18,7 @@ async function deleteProcess(req, res) {
     if (error.name === "notFound") {
       return res.sendStatus(404);
     }
-    res.sendStatus(500);
+    res.sendStatus(400);
   }
 }
 async function getProcesses(req, res) {
@@ -29,11 +29,25 @@ async function getProcesses(req, res) {
     res.sendStatus(400);
   }
 }
+async function updateProcess(req, res) {
+  try {
+    const { id } = req.params;
+    const { title, description } = res.locals.body;
+    await processesServices.updateProcess(id, title, description);
+    res.sendStatus(200);
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const processesControllers = {
   createProcess,
   deleteProcess,
   getProcesses,
+  updateProcess,
 };
 
 export default processesControllers;

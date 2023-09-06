@@ -13,6 +13,11 @@ processesRouters
     processesControllers.createProcess
   )
   .delete("/processes/:id", processesControllers.deleteProcess)
-  .get("/processes", processesControllers.getProcesses);
+  .get("/processes", processesControllers.getProcesses)
+  .put(
+    "/processes/:id",
+    validateBody(processSchemas.processSchema),
+    processesControllers.updateProcess
+  );
 
 export default processesRouters;
