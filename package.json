@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "format": "npx prettier . --write",
-    "dev": "node --watch src/index.js"
+    "dev": "node --watch ./src/index.js",
+    "migration": "node ./src/migration.js"
   },
   "keywords": [],
   "author": "",
