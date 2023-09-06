@@ -106,3 +106,21 @@ This is the required format of the body:
 Successful response:
 
 - Status code 200
+
+### 5. POST /subprocesses
+
+Create a new subprocess
+
+This is the required format of the body:
+
+```code
+  {
+    "process_id": "process's id",
+    "title": "processe's title",
+    "description": "processes's description"
+  }
+```
+
+Successful response:
+
+- Status code 201
