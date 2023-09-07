@@ -124,3 +124,28 @@ This is the required format of the body:
 Successful response:
 
 - Status code 201
+
+### 6. GET /subprocesses/:id
+
+Return all subprocesses of a unique process
+
+```code
+  [
+    {
+      "id: "number",
+      "title": "processe's title",
+      "description": "processes's description",
+      "process_id": "number"
+    },
+    {
+      "id: "number",
+      "title": "processe's title",
+      "description": "processes's description",
+      "process_id": "number"
+    }
+  ]
+```
+
+Successful response:
+
+- Status code 200

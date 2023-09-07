@@ -6,10 +6,12 @@ import subprocessesSchemas from "../schemas/subprocessesSchemas.js";
 
 const subprocessesRouters = Router();
 
-subprocessesRouters.post(
-  "/subprocesses",
-  validateBody(subprocessesSchemas.subprocessSchema),
-  subprocessesControllers.createSubprocess
-);
+subprocessesRouters
+  .get("/subprocesses/:id", subprocessesControllers.getAllSubprocesses)
+  .post(
+    "/subprocesses",
+    validateBody(subprocessesSchemas.subprocessSchema),
+    subprocessesControllers.createSubprocess
+  );
 
 export default subprocessesRouters;

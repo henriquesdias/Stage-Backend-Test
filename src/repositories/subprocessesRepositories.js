@@ -11,10 +11,16 @@ async function createSubprocess(process_id, title, description) {
     [process_id, title, description]
   );
 }
+async function getAllSubprocesses(process_id) {
+  return db.query('SELECT * FROM subprocesses WHERE "process_id" = $1', [
+    process_id,
+  ]);
+}
 
 const subprocessesRepositories = {
   deleteAllSubprocesses,
   createSubprocess,
+  getAllSubprocesses,
 };
 
 export default subprocessesRepositories;
