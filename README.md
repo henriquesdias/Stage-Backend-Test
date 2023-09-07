@@ -149,3 +149,24 @@ Return all subprocesses of a unique process
 Successful response:
 
 - Status code 200
+
+### 7. POST /events/:subprocess_id
+
+Create a new event associated to a subprocess.
+
+The 'subprocess_id' params must be a valid id.
+
+This is the required format of the body:
+
+```code
+  {
+    "title": "String , required",
+    "notes": "String , not required"
+    "date": "Date, required"
+    "time": "String, required"
+  }
+```
+
+Successful response:
+
+- Status code 201
