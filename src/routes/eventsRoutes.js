@@ -6,10 +6,12 @@ import eventsSchemas from "../schemas/eventsSchemas.js";
 
 const eventsRouters = Router();
 
-eventsRouters.post(
-  "/events/:subprocess_id",
-  validateBody(eventsSchemas.eventSchema),
-  eventsControllers.createEvent
-);
+eventsRouters
+  .get("/events/:subprocess_id", eventsControllers.getAllEvents)
+  .post(
+    "/events/:subprocess_id",
+    validateBody(eventsSchemas.eventSchema),
+    eventsControllers.createEvent
+  );
 
 export default eventsRouters;

@@ -19,9 +19,22 @@ async function createEvent(req, res) {
     res.sendStatus(400);
   }
 }
+async function getAllEvents(req, res) {
+  const { subprocess_id } = req.params;
+  try {
+    const events = await eventsServices.getAllEvents(subprocess_id);
+    res.send(events);
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const eventsControllers = {
   createEvent,
+  getAllEvents,
 };
 
 export default eventsControllers;

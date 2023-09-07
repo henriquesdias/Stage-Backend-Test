@@ -170,3 +170,27 @@ This is the required format of the body:
 Successful response:
 
 - Status code 201
+
+### 8. GET /events/:subprocess_id
+
+Return all events associated to a subprocess.
+
+This is the required format of the body:
+
+```code
+[
+  {
+    "id": number,
+    "title": string,
+    "subprocess_id": number,
+    "notes": null | string,
+    "date": date,
+    "time": string,
+    "completed": boolean
+  }
+]
+```
+
+Successful response:
+
+- Status code 200

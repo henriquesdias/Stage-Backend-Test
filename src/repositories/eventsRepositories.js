@@ -6,9 +6,15 @@ async function createEvent({ title, subprocess_id, date, time, notes }) {
     [title, subprocess_id, date, time, notes]
   );
 }
+async function getAllEvents(subprocess_id) {
+  return db.query('SELECT * FROM events WHERE "subprocess_id" = $1', [
+    subprocess_id,
+  ]);
+}
 
 const eventsRepositories = {
   createEvent,
+  getAllEvents,
 };
 
 export default eventsRepositories;
