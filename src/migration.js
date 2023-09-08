@@ -1,14 +1,14 @@
-import connection from "./database/config.js";
+import db from "./config/database.js";
 
 async function createTables() {
-  await connection.query(
+  await db.query(
     `CREATE TABLE "processes" (
       "id" SERIAL PRIMARY KEY,
       "title" varchar(50) NOT NULL,
       "description" varchar(100) NOT NULL
   );`
   );
-  await connection.query(
+  await db.query(
     `CREATE TABLE "subprocesses" (
         "id" SERIAL PRIMARY KEY,
         "title" varchar(50) NOT NULL,
@@ -16,6 +16,17 @@ async function createTables() {
         "process_id" INTEGER NOT NULL REFERENCES "processes"("id")
     );`
   );
+  await db.query(`
+    CREATE TABLE events (
+      id SERIAL PRIMARY KEY,
+      title VARCHAR(50) NOT NULL,
+      "subprocess_id" INTEGER NOT NULL REFERENCES "subprocesses"("id"),
+      notes VARCHAR(200),
+      date DATE NOT NULL,
+      time TIME NOT NULL,
+      completed BOOLEAN NOT NULL DEFAULT false
+);
+  `);
 }
 
 createTables()
