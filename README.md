@@ -204,3 +204,13 @@ The params "event_id" must be a valid id.
 Successful response:
 
 - Status code 204
+
+### 10. DELETE /subprocesses/:id
+
+Delete the subprocess.
+
+The params "id" must be a valid id.
+
+Successful response:
+
+- Status code 204

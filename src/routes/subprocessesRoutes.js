@@ -8,6 +8,7 @@ const subprocessesRouters = Router();
 
 subprocessesRouters
   .get("/subprocesses/:id", subprocessesControllers.getAllSubprocesses)
+  .delete("/subprocesses/:id", subprocessesControllers.deleteSubprocess)
   .post(
     "/subprocesses",
     validateBody(subprocessesSchemas.subprocessSchema),
