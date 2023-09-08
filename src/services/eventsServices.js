@@ -1,3 +1,4 @@
+import errors from "../errors.js";
 import eventsRepositories from "../repositories/eventsRepositories.js";
 import subprocessesRepositories from "../repositories/subprocessesRepositories.js";
 
@@ -21,14 +22,21 @@ async function getAllEvents(subprocess_id) {
   if (subprocess.rowCount === 0) {
     throw { message: "This subprocess do not exists", name: "notFound" };
   }
-  const events = (await eventsRepositories.getAllEvents(subprocess_id)).rows;
 
-  return events;
+  return (await eventsRepositories.getAllEvents(subprocess_id)).rows;
+}
+async function deleteEvent(event_id) {
+  const event = await eventsRepositories.getUniqueEvent(event_id);
+  if (event.rowCount === 0) {
+    errors.notFound("This event do not exists");
+  }
+  return eventsRepositories.deleteEvent(event_id);
 }
 
 const eventsServices = {
   createEvent,
   getAllEvents,
+  deleteEvent,
 };
 
 export default eventsServices;

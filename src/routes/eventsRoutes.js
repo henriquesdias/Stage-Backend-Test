@@ -8,6 +8,7 @@ const eventsRouters = Router();
 
 eventsRouters
   .get("/events/:subprocess_id", eventsControllers.getAllEvents)
+  .delete("/events/:event_id", eventsControllers.deleteEvent)
   .post(
     "/events/:subprocess_id",
     validateBody(eventsSchemas.eventSchema),

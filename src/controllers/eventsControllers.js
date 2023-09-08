@@ -31,10 +31,23 @@ async function getAllEvents(req, res) {
     res.sendStatus(400);
   }
 }
+async function deleteEvent(req, res) {
+  const { event_id } = req.params;
+  try {
+    await eventsServices.deleteEvent(event_id);
+    res.send(204);
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const eventsControllers = {
   createEvent,
   getAllEvents,
+  deleteEvent,
 };
 
 export default eventsControllers;

@@ -194,3 +194,13 @@ This is the required format of the body:
 Successful response:
 
 - Status code 200
+
+### 9. DELETE /events/:event_id
+
+Delete the event.
+
+The params "event_id" must be a valid id.
+
+Successful response:
+
+- Status code 204
