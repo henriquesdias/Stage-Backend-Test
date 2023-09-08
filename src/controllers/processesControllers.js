@@ -26,7 +26,7 @@ async function getProcesses(req, res) {
     const processes = await processesServices.getProcesses();
     res.send(processes);
   } catch (error) {
-    res.sendStatus(400);
+    res.status(400).send(error);
   }
 }
 async function updateProcess(req, res) {
