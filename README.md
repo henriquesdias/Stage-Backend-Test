@@ -65,7 +65,7 @@ The "id" params must be a valid id of a process
 
 Successful response:
 
-- Status code 200
+- Status code 204
 
 ### 3. GET /processes
 

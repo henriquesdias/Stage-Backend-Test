@@ -13,7 +13,7 @@ async function deleteProcess(req, res) {
   try {
     const { id } = req.params;
     await processesServices.deleteProcess(id);
-    res.sendStatus(200);
+    res.sendStatus(204);
   } catch (error) {
     if (error.name === "notFound") {
       return res.sendStatus(404);
@@ -26,7 +26,7 @@ async function getProcesses(req, res) {
     const processes = await processesServices.getProcesses();
     res.send(processes);
   } catch (error) {
-    res.status(400).send(error);
+    res.sendStatus(400);
   }
 }
 async function updateProcess(req, res) {
