@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node ./src/migration.js && node ./src/index.js ",
     "format": "npx prettier . --write",
     "dev": "node --watch ./src/index.js",
     "migration": "node ./src/migration.js"

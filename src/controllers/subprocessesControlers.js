@@ -24,10 +24,23 @@ async function getAllSubprocesses(req, res) {
     res.sendStatus(400);
   }
 }
+async function deleteSubprocess(req, res) {
+  const { id } = req.params;
+  try {
+    await subprocessesServices.deleteSubprocess(id);
+    res.sendStatus(204);
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const subprocessesControllers = {
   createSubprocess,
   getAllSubprocesses,
+  deleteSubprocess,
 };
 
 export default subprocessesControllers;

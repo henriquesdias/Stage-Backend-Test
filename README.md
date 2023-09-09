@@ -65,7 +65,7 @@ The "id" params must be a valid id of a process
 
 Successful response:
 
-- Status code 200
+- Status code 204
 
 ### 3. GET /processes
 
@@ -200,6 +200,16 @@ Successful response:
 Delete the event.
 
 The params "event_id" must be a valid id.
+
+Successful response:
+
+- Status code 204
+
+### 10. DELETE /subprocesses/:id
+
+Delete the subprocess.
+
+The params "id" must be a valid id.
 
 Successful response:
 

@@ -14,8 +14,18 @@ async function getAllEvents(subprocess_id) {
 async function deleteEvent(event_id) {
   return db.query("DELETE FROM events WHERE id = $1;", [event_id]);
 }
+async function deleteEventBySubprocessId(subprocess_id) {
+  return db.query('DELETE FROM events WHERE "subprocess_id" = $1', [
+    subprocess_id,
+  ]);
+}
 async function getUniqueEvent(event_id) {
   return db.query("SELECT * FROM events WHERE id = $1;", [event_id]);
+}
+async function deleteAllEvents(subprocess_id) {
+  return db.query('DELETE FROM events WHERE "subprocess_id" = $1', [
+    subprocess_id,
+  ]);
 }
 
 const eventsRepositories = {
@@ -23,6 +33,8 @@ const eventsRepositories = {
   getAllEvents,
   deleteEvent,
   getUniqueEvent,
+  deleteEventBySubprocessId,
+  deleteAllEvents,
 };
 
 export default eventsRepositories;
