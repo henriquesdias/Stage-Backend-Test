@@ -14,6 +14,7 @@ processesRouters
   )
   .delete("/processes/:id", processesControllers.deleteProcess)
   .get("/processes", processesControllers.getProcesses)
+  .get("/processes/:id", processesControllers.getuniqueProcess)
   .put(
     "/processes/:id",
     validateBody(processSchemas.processSchema),

@@ -4,7 +4,6 @@ function validateBody(schema) {
       abortEarly: false,
     });
     if (error) {
-      console.log(error.details.map((e) => e.message));
       return res.status(422).send(error.details.map((e) => e.message));
     }
     res.locals.body = value;

@@ -214,3 +214,23 @@ The params "id" must be a valid id.
 Successful response:
 
 - Status code 204
+
+### 11. GET /processes/:id
+
+Get unique process.
+
+The params "id" must be a valid number id.
+
+Response
+
+```code
+{
+  "id": number,
+  "title": string,
+  "description": string
+}
+```
+
+Successful response:
+
+- Status code 200
