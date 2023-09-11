@@ -9,7 +9,6 @@ Management tool for company processes and subprocesses.
 <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
 <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white">
 <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E">
-<img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white">
 
 ## How to Run
 
@@ -38,9 +37,13 @@ Follow the instructions to run the app locally
 
 7. Access http://localhost:PORT, where PORT it's value of your PORT variable in .env file.
 
-## Documentation
+## API Documentation
 
-### 1. POST /processes
+API Documentation with all endpoints, status codes, and necessary information for retrieving and creating new data.
+
+## Processes
+
+## POST /processes
 
 Create a new process.
 
@@ -48,66 +51,111 @@ This is the required format of the body:
 
 ```code
   {
-    "title": "processe's title",
-    "description": "processes's description"
+    "title": "title of process",
+    "description "description of process"
   }
 ```
 
-Successful response:
+|             | Type   | Required | Min length | Max length |
+| ----------- | ------ | -------- | ---------- | ---------- |
+| title       | string | yes      | 2          | 50         |
+| description | string | yes      | 2          | 100        |
 
-- Status code 201
+<br/>
 
-### 2. DELETE /processes/:id
+Status code:
+
+- Successful response: 201
+- Problems with body received: 422
+
+### DELETE /processes/{id}
 
 DELETE a process.
 
-The "id" params must be a valid id of a process
+The "id" params must be a valid number id of a process
 
-Successful response:
+Status code:
 
-- Status code 204
+- Successful response: 201
+- The process do not exists: 404
 
-### 3. GET /processes
+### GET /processes
 
 Get all processes.
+
+Response :
 
 ```code
   [
     {
-      "title": "processe's title",
-      "description": "processes's description"
+      "id": 10,
+      "title": "title of process",
+      "description": "description of process"
     },
     {
-      "title": "processe's title",
-      "description": "processes's description"
+      "id" : 11,
+      "title": "title of process",
+      "description": "description of process"
     }
   ]
 ```
 
-Successful response:
+Status code:
 
-- Status code 200
+- Successful response: 201
 
-### 4. PUT /processes/:id
+### PUT /processes/{id}
 
 Update a process, based on the provided title and description.
 
-The "id" params must be a valid id of a process.
+The "id" params must be a valid number id of a process.
 
 This is the required format of the body:
 
 ```code
   {
-    "title": "processe's title",
-    "description": "processes's description"
+    "title": "title of process",
+    "description": "description of process"
   }
 ```
 
-Successful response:
+|             | Type   | Required | Min length | Max length |
+| ----------- | ------ | -------- | ---------- | ---------- |
+| title       | string | yes      | 2          | 50         |
+| description | string | yes      | 2          | 100        |
 
-- Status code 200
+<br/>
 
-### 5. POST /subprocesses
+Status code:
+
+- Successful response: 200
+- Problems with body received: 422
+- The process do not exists: 404
+
+### GET /processes/{id}
+
+Get unique process.
+
+The params "id" must be a valid number id.
+
+Response :
+
+```code
+{
+  "id": 10,
+  "title": "title of process",
+  "description": "description of process"
+}
+```
+
+Status code:
+
+- Successful response: 200
+- The process do not exists: 404
+
+## Subprocesses
+
+### POST /subprocesses
 
 Create a new subprocess
 
@@ -115,122 +163,131 @@ This is the required format of the body:
 
 ```code
   {
-    "process_id": "process's id",
-    "title": "processe's title",
-    "description": "processes's description"
+    "process_id": 10,
+    "title": "title of subprocess",
+    "description": "description of subprocess"
   }
 ```
 
-Successful response:
+|             | Type   | Required | Min length | Max length |
+| ----------- | ------ | -------- | ---------- | ---------- |
+| title       | string | yes      | 2          | 50         |
+| description | string | yes      | 2          | 100        |
+| process_id  | number | yes      | -          | -          |
 
-- Status code 201
+<br/>
 
-### 6. GET /subprocesses/:id
+Status code:
+
+- Successful response: 200
+- The process do not exists: 404
+- Problems with body received: 422
+
+### GET /subprocesses/{id}
 
 Return all subprocesses of a unique process
+
+Response :
 
 ```code
   [
     {
-      "id: "number",
-      "title": "processe's title",
-      "description": "processes's description",
-      "process_id": "number"
+      "id: 10",
+      "title": "title of subprocess",
+      "description": "description of subprocess",
+      "process_id": 3
     },
     {
-      "id: "number",
-      "title": "processe's title",
-      "description": "processes's description",
-      "process_id": "number"
+      "id: 11",
+      "title": "title of subprocess",
+      "description": "description of subprocess",
+      "process_id": 3
     }
   ]
 ```
 
-Successful response:
+Status code:
 
-- Status code 200
+- Successful response: 200
+- The process do not exists: 404
 
-### 7. POST /events/:subprocess_id
+### DELETE /subprocesses/{id}
+
+Delete the subprocess.
+
+The params "id" must be a valid number id.
+
+Status code:
+
+- Successful response: 204
+- The subprocess do not exists: 404
+
+## Events
+
+### POST /events/{subprocess_id}
 
 Create a new event associated to a subprocess.
 
-The 'subprocess_id' params must be a valid id.
+The 'subprocess_id' params must be a valid number id.
 
 This is the required format of the body:
 
 ```code
   {
-    "title": "String , required",
-    "notes": "String , not required"
-    "date": "Date, required"
-    "time": "String, required"
+    "title": "title of event",
+    "notes": "notes about event"
+    "date": "start date of event"
+    "time": "start time of event"
   }
 ```
 
-Successful response:
+|       | Type   | Required | Min length | Max length |
+| ----- | ------ | -------- | ---------- | ---------- |
+| title | string | yes      | 2          | 50         |
+| notes | string | no       | 0          | 200        |
+| date  | date   | yes      | -          | -          |
+| time  | string | yes      | -          | -          |
 
-- Status code 201
+<br/>
 
-### 8. GET /events/:subprocess_id
+Status code:
+
+- Successful response: 201
+- The subprocess do not exists: 404
+- Problems with body received: 422
+
+### GET /events/{subprocess_id}
 
 Return all events associated to a subprocess.
 
-This is the required format of the body:
+Response:
 
 ```code
 [
   {
-    "id": number,
-    "title": string,
-    "subprocess_id": number,
-    "notes": null | string,
-    "date": date,
-    "time": string,
-    "completed": boolean
+    "id": 10,
+    "title": "title of event",
+    "subprocess_id": 12,
+    "notes": "notes about event",
+    "date": "2023-09-07T03:00:00.000Z",
+    "time": "17:00:00",
+    "completed": false
   }
 ]
 ```
 
-Successful response:
+Status code:
 
-- Status code 200
+- Successful response: 200
+- The subprocess do not exists: 404
 
-### 9. DELETE /events/:event_id
+### DELETE /events/{event_id}
 
 Delete the event.
 
-The params "event_id" must be a valid id.
+The params "event_id" must be a valid number id.
 
-Successful response:
+Status code:
 
-- Status code 204
-
-### 10. DELETE /subprocesses/:id
-
-Delete the subprocess.
-
-The params "id" must be a valid id.
-
-Successful response:
-
-- Status code 204
-
-### 11. GET /processes/:id
-
-Get unique process.
-
-The params "id" must be a valid number id.
-
-Response
-
-```code
-{
-  "id": number,
-  "title": string,
-  "description": string
-}
-```
-
-Successful response:
-
-- Status code 200
+- Successful response: 204
+- The subprocess do not exists: 404
