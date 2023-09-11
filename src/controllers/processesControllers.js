@@ -30,11 +30,23 @@ async function getProcesses(req, res) {
   }
 }
 async function updateProcess(req, res) {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const { title, description } = res.locals.body;
     await processesServices.updateProcess(id, title, description);
     res.sendStatus(200);
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    res.sendStatus(400);
+  }
+}
+async function getuniqueProcess(req, res) {
+  const { id } = req.params;
+  try {
+    const process = await processesServices.getuniqueProcess(id);
+    res.send(process);
   } catch (error) {
     if (error.name === "notFound") {
       return res.sendStatus(404);
@@ -48,6 +60,7 @@ const processesControllers = {
   deleteProcess,
   getProcesses,
   updateProcess,
+  getuniqueProcess,
 };
 
 export default processesControllers;

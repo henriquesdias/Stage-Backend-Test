@@ -24,9 +24,16 @@ async function getProcesses() {
 async function updateProcess(id, title, description) {
   const process = await processesRepositories.getProcessById(id);
   if (process.rowCount === 0) {
-    throw { message: "This process do not exists", name: "notFound" };
+    errors.notFound("This process do not exists");
   }
   return processesRepositories.updateProcess(id, title, description);
+}
+async function getuniqueProcess(process_id) {
+  const process = await processesRepositories.getProcessById(process_id);
+  if (process.rowCount === 0) {
+    errors.notFound("This process do not exists");
+  }
+  return process.rows[0];
 }
 
 const processesServices = {
@@ -34,6 +41,7 @@ const processesServices = {
   deleteProcess,
   getProcesses,
   updateProcess,
+  getuniqueProcess,
 };
 
 export default processesServices;
